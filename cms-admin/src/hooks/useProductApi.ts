@@ -13,11 +13,12 @@ const useProductApi = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchData = async () => {
-      dispatch(getAllProductsAction())
+    if (data.length === 0) {
+      const fetchData = async () => {
+        dispatch(getAllProductsAction())
+      }
+      fetchData()
     }
-
-    fetchData()
   }, [])
 
   useEffect(() => {

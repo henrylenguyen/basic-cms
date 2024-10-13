@@ -25,11 +25,13 @@ const FormLayout: React.FunctionComponent<IFormLayoutProps> = () => {
     resolver: zodResolver(formSchema)
   })
   const onSubmit = (data: ProductInterface) => {
+    console.log('data:', data)
     const formData = new FormData()
 
     if (data.productType) {
       formData.append('productType', data.productType)
-    } else if (data.tags?.length ?? 0 > 0) {
+    }
+    if (data.tags?.length > 0) {
       formData.append('tags', JSON.stringify(data.tags))
     }
     formData.append('title', data.title)
@@ -131,7 +133,7 @@ const FormLayout: React.FunctionComponent<IFormLayoutProps> = () => {
             />
             <div className='flex flex-col gap-2'>
               <span className='block text-sm font-medium text-gray-700'>Tags</span>
-              <TagInput name='selectedTags' availableTags={mockTag} />
+              <TagInput name='tags' availableTags={mockTag} />
             </div>
           </div>
         </div>

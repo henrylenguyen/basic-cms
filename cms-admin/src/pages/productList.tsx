@@ -31,7 +31,7 @@ const ProductListPage: React.FunctionComponent<IProductListPageProps> = () => {
 
   return (
     <div className='ml-[280px] flex h-full flex-1 flex-col gap-5 rounded-[15px] bg-white p-8'>
-      <MultiSearch placeholder='search tags....' onSearchChange={handleSearchChange} />
+      <MultiSearch placeholder='Type and enter to search....' onSearchChange={handleSearchChange} />
       <TableContainer
         data={(filteredData as ProductInterface[]) ?? []}
         columns={productColumns}

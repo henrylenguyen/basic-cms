@@ -5,7 +5,7 @@ import { IProductState } from '@/redux/interface/productState'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: IProductState = {
-  data: null,
+  data: [],
   isLoading: false,
   error: null
 }
@@ -19,10 +19,7 @@ const ProductSlice = createSlice({
       state.error = null
     },
     updateProductToStore: (state, action) => {
-      state.data = {
-        ...(state.data || {}),
-        ...action.payload
-      }
+      state.data = [...state.data, action.payload]
     }
   },
   extraReducers: (builder) => {
@@ -31,7 +28,6 @@ const ProductSlice = createSlice({
       .addCase(getAllProductsAction.fulfilled, getAllProductFulfilled)
       .addCase(getAllProductsAction.rejected, handleError)
       .addCase(createNewProductAction.pending, handlePending)
-      .addCase(createNewProductAction.fulfilled, getAllProductFulfilled)
       .addCase(createNewProductAction.rejected, handleError)
   }
 })

@@ -1,5 +1,7 @@
+import { ProductInterface } from '@/types/productInterface'
+
 export interface IProductState {
-  data: unknown
+  data: ProductInterface[]
   isLoading: boolean
   error: string | null
 }
