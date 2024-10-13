@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import productAPI from '@/api/products'
 import { Editor } from '@tinymce/tinymce-react'
 import React from 'react'
@@ -8,7 +9,11 @@ interface IRichEditorProps {
 
 const RichEditor: React.FunctionComponent<IRichEditorProps> = ({ onChange }) => {
   // Hàm xử lý upload ảnh
-  const handleImageUpload = async (blobInfo, success, failure) => {
+  const handleImageUpload: any = async (
+    blobInfo: { blob: () => string | Blob },
+    success: (arg0: any) => void,
+    failure: (arg0: string) => void
+  ) => {
     const formData = new FormData()
     formData.append('images', blobInfo.blob())
 
@@ -17,12 +22,11 @@ const RichEditor: React.FunctionComponent<IRichEditorProps> = ({ onChange }) => 
 
       if (res.status === 201) {
         const imageUrl = res.data.data[0]
-        console.log('Image URL:', imageUrl)
         success(imageUrl)
       } else {
         failure('Upload failed with status: ' + res.status)
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Upload error:', error)
       failure(error.message) // TinyMCE sẽ hiển thị lỗi
     }

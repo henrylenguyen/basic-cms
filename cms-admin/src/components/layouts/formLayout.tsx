@@ -31,7 +31,7 @@ const FormLayout: React.FunctionComponent<IFormLayoutProps> = () => {
     if (data.productType) {
       formData.append('productType', data.productType)
     }
-    if (data.tags?.length > 0) {
+    if (data.tags?.length ?? 0 > 0) {
       formData.append('tags', JSON.stringify(data.tags))
     }
     formData.append('title', data.title)
@@ -86,7 +86,12 @@ const FormLayout: React.FunctionComponent<IFormLayoutProps> = () => {
                 <FormItem>
                   <FormLabel>Media *</FormLabel>
                   <FormControl>
-                    <ImageUploader onCompleteUpload={(urls, blob) => field.onChange(blob)} />
+                    <ImageUploader
+                      onCompleteUpload={(url, blob) => {
+                        console.log('url:', url)
+                        field.onChange(blob)
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
