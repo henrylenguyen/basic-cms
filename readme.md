@@ -1,5 +1,7 @@
 # Dự án interview basic cms
 
+Link deploy 👉 https://cms-basic-c70f4.web.app/create-product
+
 ## Hướng dẫn sử dụng:
 1. clone project về thông qua lệnh ở ***terminal***
 
