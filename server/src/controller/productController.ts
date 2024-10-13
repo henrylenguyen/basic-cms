@@ -5,21 +5,21 @@ import { Product } from '../models/productModel'
 import { uploadImages } from '../services/uploadService'
 import createResponse from '../utils/dataResponse'
 
-export const uploadImage = async (req: Request, res: Response): Promise<Response> => {
+export const uploadImage = async (req: Request, res: Response): Promise<void> => {
   console.log('req:', req.files)
   try {
     const files = req.files as Express.Multer.File[]
     console.log('files:', files)
 
     if (!files || !Array.isArray(files) || files.length === 0) {
-      return res.status(400).json(createResponse(400, null, 'No files uploaded'))
+      res.status(400).json(createResponse(400, null, 'No files uploaded'))
     }
 
     const imageUrls = await uploadImages(files)
     console.log('imageUrls:', imageUrls)
-    return res.status(201).json(createResponse(201, imageUrls, 'Images uploaded successfully'))
+    res.status(201).json(createResponse(201, imageUrls, 'Images uploaded successfully'))
   } catch (error: any) {
-    return res.status(500).json(createResponse(500, null, error.message))
+    res.status(500).json(createResponse(500, null, error.message))
   }
 }
 
